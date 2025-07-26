@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FTSE 100 Fear and Greed</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>FTSE 100 Fear and Greed</h2>
+    <canvas id="spChart" width="800" height="400"></canvas>
+
+    <script>
+const ctx = document.getElementById('spChart').getContext('2d');
+const spChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ dates | tojson }},
+        datasets: [{
+            label: 'FTSE 100 Closing Price',
+            data: {{ closes | tojson }},
+            borderColor: 'green',
+            backgroundColor: 'rgba(0, 128, 0, 0.1)',
+            borderWidth: 2,
+            tension: 0.2,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: context => `Close: £${context.parsed.y}`
+                }
+            }
+        }
+    }
+});
+</script>
+

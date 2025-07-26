@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}Fear & Greed Indexes{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Fear & Greed Indexes</h2>
+    <p>Fear and Greed Indexes measure market sentiment by analysing market factors such as price momentum, volatility, trading volume, and demand for safe-haven assets, like gold or treasury bonds. When investors are overly greedy, markets tend to be overbought and riskier; when fear dominates, markets may be undervalued as investors rush to safety. 
+    </P>
+    <P>These indexes serve as a psychological barometer, helping investors identify potential turning points driven by crowd emotion rather than reason. It may be wise to close positions during times of greed, and open up fresh positions when most investors divest from the markets. </p>
+    </P>
+    <P>To quote Charlie Munger, "Mimicking the herd invites regression to the mean."</P>
+    <div class="index-links">
+       <ul>
+        <li><a href="{{ url_for('sp500_index') }}">S&P 500 Fear & Greed Index</a></li>
+        <li><a href="{{ url_for('crypto_index') }}">Crypto Fear & Greed Index</a></li>
+       </ul>
+    </div>
+</div>
+{% endblock %}

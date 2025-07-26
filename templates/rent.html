@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}Rent Prices{% endblock %}
+{% block content %}
+<h2>Irish Rent Prices Over Time</h2>
+<canvas id="rentChart" width="600" height="400"></canvas>
+
+<div class="chart-commentary">
+    <button id="toggleCommentary">Show Commentary</button>
+    <div id="commentaryContent" style="display: none;">
+        <h3>Why Do Rent Trends Matter?</h3> 
+        <p>Rent trends are an indicator of economic health and livability, as rent rates impact businesses, individuals and policies. Rising rents can strain household budgets, especially for low- and middle-income earners, forcing trade-offs between housing, food and healthcare. It is also a major component of inflation metrics such as the Consumer Price Index (CPI), and can signal or contribute to broader inflation, influencing central bank policies such as interest rates. Governments use rent data to design affordable housing programs, rent control policies, or tax incentives for developers, who also use rent trend data to  identify profitable markets for rental properties or new construction.</p>
+        
+        <h3>Ireland's Rental Market Performance</h3> 
+        <p>Ireland is experiencing record high rents and a severe supply shortage, with less than 2,300 homes available to rent nationwide. The housing shortage is driven  by a combination of long-term systemic failures, policy missteps, and market constraints. Construction fell after the Celtic Tiger collapse, as up to 50,000 construction workers left Ireland, leading to wage inflation within the construction industry. This, combined with price hikes on important builidng materials, has raised construcution costs significantly. In terms of policy, development loans have been made more expensive by rising interest rates, and high income tax and restrictive rent policies within Ireland has caused upwards of 40,000 landlords leaving Ireland in the last 10 years. An Bord Pleanála has been facing a significant backlog, causing many projects such as the Poolbeg West Strategic Development Zone to experience great delays (8+ years) in completion.   </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const years = {{ years | tojson }};
+    const nationalRent = {{ national_rent | tojson }};
+    const dublinRent = {{ dublin_rent | tojson }};
+
+    const ctx = document.getElementById('rentChart').getContext('2d');
+    const rentChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Average National Rent (€)',
+                    data: nationalRent,
+                    borderColor: 'blue',
+                    fill: false
+                },
+                {
+                    label: 'Average Dublin Rent (€)',
+                    data: dublinRent,
+                    borderColor: 'red',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Rent (€)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    document.getElementById("toggleCommentary").addEventListener("click", function () {
+        const content = document.getElementById("commentaryContent");
+        const isVisible = content.style.display === "block";
+        content.style.display = isVisible ? "none" : "block";
+        this.textContent = isVisible ? "Show Commentary" : "Hide Commentary";
+    });
+</script>
+
+<p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+
+{% endblock %}

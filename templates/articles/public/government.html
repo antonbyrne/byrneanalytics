@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Irish Government Spending Trends{% endblock %}
+{% block content %}
+<h2>Irish Government Spending Trends</h2>
+        <p>
+            In recent years, Irish public spending has expanded steadily, reaching approximately €116 billion in 2024, up from €107.5 billion in 2023 and €96.3 billion in 2022 according to official “Where Your Money Goes” figures. The 2025 budget projects further growth to around €120 billion, reflecting a strong commitment to funding key sectors like health, education, and housing. While this spending surge supports essential services, it also places pressure on the public finances, requiring a careful balance in upcoming budgets.
+        </p>
+        <p>
+            Social protection and healthcare remain the largest single expenditures. In 2023, social protection spending reached €63.5 billion, up 7% from 2022—accounting for 12% of GDP and a significant increase in housing supports, partly due to refugee assistance. Healthcare spending exceeded €33.5 billion in the same year, growing nearly 7% — driven largely by rising costs and COVID‑19 aftermath. These areas now consume roughly half of all government expenditure, leaving less room for discretionary and capital budgets.
+        </p>
+        <p>
+            Despite high total spending, Ireland managed a government surplus of €7.5 billion (1.5% of GDP) in 2023, though this was down from the prior year’s €8.6 billion (1.7%) surplus. Debt levels also slightly declined, with gross debt falling to €220.7 billion (43.3% of GDP). Capital investment under the National Development Plan increased substantially, with core capital spending rising to €12.6 billion in 2024, particularly in transport, housing, and climate-related infrastructure. This suggests a fiscal policy focused on investing for future growth, while maintaining prudent control over the national balance sheet.
+        </p>
+        <p><em>— Byrne Analytics, date </em></p>
+
+<p><a href="{{ url_for('insights') }}">← Back to Insights</a></p>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
+
+{% endblock %}

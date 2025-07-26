@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}The Impact of Interest Rates{% endblock %}
+{% block content %}
+
+<h2>Salary Growth vs. Inflation: Who’s Winning?</h2>
+        <p>
+            In recent years, inflation has outpaced salary increases for many professions. Inflation surged at the start of the decade due to disruptions in the global supply chain caused by the COVID-19 pandemic, which resulted in sudden shortages of goods in Ireland. The reduced supply caused the prices of essential items to rise. At the same time, many salaries showed only modest growth. This disparity resulted in a substantial decline in purchasing power.
+        </p>
+        <p>
+            As inflation stabilizes, salary negotiations and public sector adjustments will be crucial. Monitoring this trend over time can help professionals understand their real earnings trajectory.
+        </p>
+        <p><em>— Byrne Analytics, 22/06/2025</em></p>
+
+<p><a href="{{ url_for('insights') }}">← Back to Insights</a></p>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% block title %}Ireland's Government Debt{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Irish Government Debt (2000–2026)</h2>
+    <canvas id="debtChart" width="800" height="400"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const years = {{ years | tojson }};
+const debtValues = {{ debt_values | tojson }};
+const debtPercent = {{ debt_percent | tojson }};
+
+const ctx = document.getElementById('debtChart').getContext('2d');
+const debtChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: years,
+        datasets: [
+            {
+                label: 'Debt (Billion EUR)',
+                data: debtValues,
+                backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                borderColor: 'blue',
+                borderWidth: 1,
+                yAxisID: 'y1'
+            },
+            {
+                label: 'Debt to Revenue (%)',
+                data: debtPercent,
+                type: 'line',
+                borderColor: 'red',
+                backgroundColor: 'rgba(255,0,0,0.1)',
+                fill: false,
+                yAxisID: 'y2'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y1: {
+                type: 'linear',
+                position: 'left',
+                title: {
+                    display: true,
+                    text: 'Debt (Billion EUR)'
+                }
+            },
+            y2: {
+                type: 'linear',
+                position: 'right',
+                title: {
+                    display: true,
+                    text: 'Debt to Revenue (%)'
+                },
+                grid: {
+                    drawOnChartArea: false
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Year'
+                }
+            }
+        }
+    }
+});
+</script>
+
+<div class="chart-commentary">
+    <strong>Note:</strong> The data for 2025 and 2026 are based on forecasted data from the National Treasury Management Agency.
+</div>
+
+
+{% endblock %}

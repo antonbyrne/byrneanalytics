@@ -1,0 +1,191 @@
+{% extends 'layout.html' %}
+{% block title %}Salary vs Inflation{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salary vs Inflation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px;">
+    <h1 style="font-size: 2em; margin-bottom: 0;">Salary vs Inflation Over Time</h1>
+    <h2 style="font-weight: normal; font-size: 1.2em; color: #555;">Irish Primary School Teachers (Post-2011 Entrants)</h2>
+
+    <div style="margin-top: 20px;">
+        <label><input type="checkbox" id="toggleReal" checked> Show Real (Inflation-Adjusted) Salaries</label>
+    </div>
+
+    <canvas id="myChart" width="800" height="500" style="margin-top: 30px;"></canvas>
+
+<div class="chart-commentary">
+    <button id="toggleCommentary">Show Commentary</button>
+    <div id="commentaryContent" style="display: none;">
+        <p><strong>Trend:</strong> Starter salaries for Irish teachers have remained mostly flat in real terms since 2016.</p>
+        <p><strong>Spike:</strong> The 2022 inflation surge significantly reduced the value of all salary levels.</p>
+        <p><strong>Outlook:</strong> Without adjustment, wages may lag behind cost-of-living increases.</p>
+    </div>
+</div>
+
+<body>
+
+<form method="get" action="{{ url_for('salary') }}">
+    <label for="profession">Choose a profession:</label>
+    <select name="profession" id="profession" onchange="this.form.submit()">
+        <option value="teacher" {% if profession == "teacher" %}selected{% endif %}>Primary School Teacher</option>
+        <option value="nurse" {% if profession == "nurse" %}selected{% endif %}>Staff Nurse</option>
+    </select>
+</form>
+
+
+
+    <script>
+        // Pull data from Flask
+        const years = {{ years | tojson }};
+        const inflation = {{ inflation | tojson }};
+        const starter = {{ starter | tojson }};
+        const mid = {{ mid | tojson }};
+        const top_salary = {{ top | tojson }};
+
+        const starter_real = {{ starter_real | tojson }};
+        const mid_real = {{ mid_real | tojson }};
+        const top_real = {{ top_real | tojson }};
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: 'Starter Salary (€)',
+                        data: starter,
+                        borderColor: 'blue',
+                        yAxisID: 'ySalary'
+                    },
+                    {
+                        label: 'Mid-Career Salary (€)',
+                        data: mid,
+                        borderColor: 'green',
+                        yAxisID: 'ySalary'
+                    },
+                    {
+                        label: 'Top Salary (€)',
+                        data: top_salary,
+                        borderColor: 'purple',
+                        yAxisID: 'ySalary'
+                    },
+                    {
+                        label: 'Inflation Rate (%)',
+                        data: inflation,
+                        borderColor: 'red',
+                        yAxisID: 'yInflation'
+                    },
+                    {
+                        label: 'Starter Salary (Real €)',
+                        data: starter_real,
+                        borderColor: 'lightblue',
+                        borderDash: [5, 5],
+                        yAxisID: 'ySalary'
+                    },
+                    {
+                        label: 'Mid-Career Salary (Real €)',
+                        data: mid_real,
+                        borderColor: 'lightgreen',
+                        borderDash: [5, 5],
+                        yAxisID: 'ySalary'
+                    },
+                    {
+                        label: 'Top Salary (Real €)',
+                        data: top_real,
+                        borderColor: 'violet',
+                        borderDash: [5, 5],
+                        yAxisID: 'ySalary'
+                    }
+                ]
+            },
+
+              options: {
+    responsive: true,
+    scales: {
+        ySalary: {
+            type: 'linear',
+            position: 'left',
+            title: {
+                display: true,
+                text: 'Salary (€)'
+            }
+        },
+        yInflation: {
+            type: 'linear',
+            position: 'right',
+            title: {
+                display: true,
+                text: 'Inflation Rate (%)'
+            },
+            grid: {
+                drawOnChartArea: false
+            }
+        }
+    },
+    plugins: {
+        annotation: {
+            annotations: {
+                highInflation2022: {
+                    type: 'line',
+                    xMin: '2022',
+                    xMax: '2022',
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    label: {
+                        content: 'Spike',
+                        enabled: true,
+                        position: 'start',
+                        color: 'red'
+                    }
+                },
+                highInflation2023: {
+                    type: 'line',
+                    xMin: '2023',
+                    xMax: '2023',
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    label: {
+                        content: 'Spike',
+                        enabled: true,
+                        position: 'start',
+                        color: 'red'
+                    }
+                }
+            }
+        }
+    }
+}
+
+        });
+        document.getElementById('toggleReal').addEventListener('change', function () {
+    const show = this.checked;
+    myChart.data.datasets.forEach(ds => {
+        if (ds.label.includes('Real €')) {
+            ds.hidden = !show;
+        }
+    });
+    myChart.update();
+});
+
+    </script>
+<script>
+    document.getElementById("toggleCommentary").addEventListener("click", function () {
+        const content = document.getElementById("commentaryContent");
+        const isVisible = content.style.display === "block";
+        content.style.display = isVisible ? "none" : "block";
+        this.textContent = isVisible ? "Show Commentary" : "Hide Commentary";
+    });
+</script>
+
+</body>
+</html>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
+
+{% endblock %}

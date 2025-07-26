@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<h2>Feedback / Suggestions</h2>
+<p>We’d love to hear your suggestions, feature ideas, or general thoughts on the site.</p>
+
+<form method="post" action="{{ url_for('feedback') }}" class="feedback-form">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+
+    <label for="email">Email (optional):</label>
+    <input type="email" name="email">
+
+    <label for="message">Your Message:</label>
+    <textarea name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Feedback</button>
+</form>
+
+{% if get_flashed_messages() %}
+    <p class="flash">{{ get_flashed_messages()[0] }}</p>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Rising Rent Trends{% endblock %}
+{% block content %}
+<h2>Rising Rent Trends</h2>
+        <p>
+            Over the past decade, Ireland has experienced a sharp and sustained rise in residential rents, with average national rents more than doubling since 2013. In 2024, average rents outside Dublin exceeded €1,400 per month, while average Dublin rents surpassed €2,100, with some areas pushing significantly higher. This escalation has made housing affordability a central political and economic concern, particularly for younger workers, students, and single-income households.
+        </p>
+        <p>
+            The primary driver of rising rents is a chronic imbalance between supply and demand. Ireland’s population has grown rapidly in recent years, driven by strong natural growth and net inward migration, while housing construction has lagged behind. New rental stock entering the market has failed to keep pace, and many small landlords have exited the market due to regulatory burdens or rising mortgage rates. As a result, competition for available rental properties has intensified, pushing prices upward.        
+        </p>
+        <p>
+            Additional upward pressure has come from institutional investors purchasing large volumes of housing, prioritizing higher-yield urban rentals. Meanwhile, planning delays, high construction costs, and limited land availability in urban cores have constrained supply. The rise of remote work and flexible leasing has further increased demand in regions that previously had more affordable rents. Unless housing supply meaningfully increases, especially in cities and commuter belts, rent inflation is likely to remain a persistent structural challenge in Ireland’s economy.      
+        </p>
+        <p><em>— Byrne Analytics, date </em></p>
+
+<p><a href="{{ url_for('insights') }}">← Back to Insights</a></p>
+
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
+
+{% endblock %}
