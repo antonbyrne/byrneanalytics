@@ -1,24 +1,27 @@
 {% extends 'layout.html' %}
 {% block title %}Home{% endblock %}
-{% block content %}
 
-<div class="card">
-    <h2>Welcome</h2>
-    <p>Making Irish Financial Data Simple and Accessible. 
-        </p>
-     <p>
-       Insightful Visuals and Commentary on Ireland's Economic Trends.
-    </p>    
-    <p>
-        Explore topics like:</p>
-    <ul>
-        <li><a href="{{ url_for('unemployment') }}">Unemployment Rate in Ireland</a></li>
-        <li><a href="{{ url_for('gdp_chart') }}">Ireland's Gross Domestic Product</a></li>
-        <li><a href="{{ url_for('rent') }}">Rising Rent Prices in Ireland</a></li>
-        <li><a href="{{ url_for('mortgage') }}">Irish Mortgage Interest Rates</a></li>
-        <li><a href="{{ url_for('debt') }}">Irish Government Debt Trends</a></li>
-    </ul>
+{% block content %}
+<div class="card home-card">
+   
+    <h2>Understand Ireland’s Economy.</h2>
+    <p class="hero-subtext">Making Irish Financial Data Simple and Accessible.</p>
+
+    <a href="{{ url_for('visuals') }}" class="cta-button">Dive Into Data</a>
+
 </div>
+
+<div id="quote-box" class="quote-box">
+    <span class="quote-icon">“</span>
+    <blockquote id="quote-text">Loading insight...</blockquote>
+</div>
+
+<script src="{{ url_for('static', filename='quotes.js') }}"></script>
+<script>
+    const quoteBox = document.getElementById("quote-text");
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quoteBox.textContent = quotes[randomIndex];
+</script>
 
 {% endblock %}
 

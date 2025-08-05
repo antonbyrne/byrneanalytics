@@ -10,6 +10,10 @@ app.secret_key = 'byrne_group_byrne_analytics'
 def home():
     return render_template('home.html')
 
+@app.route('/visuals')
+def visuals():
+    return render_template('visuals.html')
+
 @app.route('/unemployment')
 def unemployment():
     import pandas as pd
@@ -135,6 +139,7 @@ def sp500_index():
     if not raw_values:
         return "Error: No data found in response."
 
+
     dates = [datetime.fromtimestamp(entry.get("x") / 1000).strftime('%Y-%m-%d') for entry in raw_values]
     values = [entry.get("y") for entry in raw_values]
 
@@ -155,4 +160,3 @@ def crypto_index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

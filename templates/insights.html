@@ -1,23 +1,41 @@
 {% extends 'layout.html' %}
 {% block title %}Insights{% endblock %}
 {% block content %}
-<h2>Articles</h2>
+<div class="card">
+    <h2>Articles</h2>
+    <input type="text" id="articleSearch" placeholder="Search articles..." class="search-bar">
 
-<h3>Salaries</h3>
-<ul>
-  <li><a href="{{ url_for('salary_article', article='salary_vs_inflation') }}">Salary Growth vs Inflation: Who's Winning?</a></li>
-</ul>
+    <div id="articleList">
+      <h3>Salaries</h3>
+      <ul>
+        <li><a href="{{ url_for('salary_article', article='salary_vs_inflation') }}">Salary Growth vs Inflation: Who's Winning?</a></li>
+    </ul>
 
-<h3>Housing</h3>
-<ul>
-  <li><a href="{{ url_for('housing_article', article='rent_trends') }}">Rising Rent Prices</a></li>
-  <li><a href="{{ url_for('housing_article', article='mortgage_effects') }}">The Impact of Interest Rates on the Irish Housing Market</a></li>
-</ul>
+    <h3>Housing</h3>
+     <ul>
+        <li><a href="{{ url_for('housing_article', article='rent_trends') }}">Rising Rent Prices</a></li>
+        <li><a href="{{ url_for('housing_article', article='mortgage_effects') }}">The Impact of Interest Rates on the Irish Housing Market</a></li>
+    </ul>
 
-<h3>Public & Policy</h3>
-<ul>
-  <li><a href="{{ url_for('public_article', article='government') }}">Government Spending Trends</a></li>
-</ul>
+    <h3>Public & Policy</h3>
+      <ul>
+        <li><a href="{{ url_for('public_article', article='government') }}">Government Spending Trends</a></li>
+      </ul>
+  </div>
+</div>    
+
+<script>
+document.getElementById('articleSearch').addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const list = document.getElementById('articleList');
+    const items = list.getElementsByTagName('li');
+
+    Array.from(items).forEach(function (item) {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchTerm) ? '' : 'none';
+    });
+});
+</script>
 
 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="top-button">↑ Top</button>
 

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}Visuals{% endblock %}
+{% block content %}
+
+<div class="card">
+    <h2>Visuals</h2>
+    <p> Insightful Visuals and Commentary on Ireland's Economic Trends. 
+        </p>
+       
+    <p>
+        Explore topics like:</p>
+    <ul>
+        <li><a href="{{ url_for('unemployment') }}">Unemployment Rate in Ireland</a></li>
+        <li><a href="{{ url_for('gdp_chart') }}">Ireland's Gross Domestic Product</a></li>
+        <li><a href="{{ url_for('rent') }}">Rising Rent Prices in Ireland</a></li>
+        <li><a href="{{ url_for('mortgage') }}">Irish Mortgage Interest Rates</a></li>
+        <li><a href="{{ url_for('debt') }}">Irish Government Debt Trends</a></li>
+    </ul>
+</div>
+
+{% endblock %}

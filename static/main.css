@@ -29,6 +29,12 @@ header h1 a {
 }
 
 nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
     margin-top: 0.5rem;
 }
 
@@ -92,6 +98,12 @@ a:hover {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.home-card {
+    background: linear-gradient(145deg, #fdfdfd, #f3f6fa);
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -224,3 +236,153 @@ hr {
     margin-top: 1em;
 }
 
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+    border-radius: 6px;
+}
+
+/* Dropdown items */
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover styles */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.summary-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.summary-card h3 {
+  margin-top: 0;
+}
+
+.summary-card a {
+  color: #0056b3;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hero-subtext {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 1.5rem;
+    color: #444;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0b5ed7;
+}
+
+
+.card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.quote-box {
+    background-color: #f9f9f9;
+    border-left: 4px solid #0d6efd;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    color: #333;
+    font-size: 1rem;
+    border-radius: 6px;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.quote-box .quote-icon {
+    font-size: 4rem;         /* Increased from 2rem */
+    position: absolute;
+    top: -0.25rem;           /* Slight nudge upward */
+    left: 0.5rem;            /* Align nicely with the text */
+    color: #0d6efd;
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.2;            /* Light opacity for elegance */
+    pointer-events: none;
+}
+
+.quote-box blockquote {
+    padding-left: 2.5rem;
+    margin: 0;
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
